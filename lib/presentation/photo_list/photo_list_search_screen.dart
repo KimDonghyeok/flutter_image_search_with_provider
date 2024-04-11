@@ -54,23 +54,20 @@ class _PhotoListScreenState extends State<PhotoListScreen> {
               ),
             ),
             const Divider(),
-            viewModel.photos.isEmpty
-                ? Center(
-                    child: Container(
-                    child: const Text('검색결과가 없습니다.'),
-                  ))
-                : Expanded(
-                    child: viewModel.isLoading
-                        ? const Center(child: CircularProgressIndicator())
-                        : GridView.count(
-                            crossAxisCount: 2,
-                            mainAxisSpacing: 8,
-                            crossAxisSpacing: 8,
-                            children: viewModel.photos
-                                .map((photo) => ImageCard(photo: photo))
-                                .toList(),
-                          ),
-                  ),
+            Expanded(
+              child: viewModel.isLoading
+                  ? const Center(child: CircularProgressIndicator())
+                  : viewModel.photos.isEmpty
+                      ? const Center(child: Text('검색 결과가 없습니다.'))
+                      : GridView.count(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 8,
+                          crossAxisSpacing: 8,
+                          children: viewModel.photos
+                              .map((photo) => ImageCard(photo: photo))
+                              .toList(),
+                        ),
+            ),
           ],
         ),
       ),
