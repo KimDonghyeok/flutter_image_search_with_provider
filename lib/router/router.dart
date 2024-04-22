@@ -1,6 +1,5 @@
-import 'package:flutter_image_search_with_provider/data/data_source/pixabay_data_source.dart';
 import 'package:flutter_image_search_with_provider/data/model/photo.dart';
-import 'package:flutter_image_search_with_provider/data/repository/photo_search_result_repository_impl.dart';
+import 'package:flutter_image_search_with_provider/di/diSetup.dart';
 import 'package:flutter_image_search_with_provider/presentation/photo_detail/photo_detail_screen.dart';
 import 'package:flutter_image_search_with_provider/presentation/photo_list/photo_list_search_screen.dart';
 import 'package:flutter_image_search_with_provider/presentation/photo_list/photo_list_search_view_model.dart';
@@ -13,11 +12,7 @@ final router = GoRouter(
       path: '/',
       builder: (context, state) {
         return ChangeNotifierProvider(
-          create: (context) => PhotoListSearchViewModel(
-            photoSearchResultRepository: PhotoSearchResultRepositoryImpl(
-              photoDataSource: PixabayDataSource(),
-            ),
-          ),
+          create: (context) => getIt<PhotoListSearchViewModel>(),
           child: const PhotoListScreen(),
         );
       },
